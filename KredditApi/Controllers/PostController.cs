@@ -1,3 +1,4 @@
+using Contexts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KredditApi.Controllers;
@@ -6,6 +7,13 @@ namespace KredditApi.Controllers;
 [Route("api/posts")]
 public class PostController : ControllerBase
 {
+    private readonly PostContext _context;
+
+    public PostController(PostContext context)
+    {
+        _context = context;
+    }
+    
     // GET: api/posts
     [HttpGet]
     public IActionResult GetPosts()

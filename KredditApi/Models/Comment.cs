@@ -1,17 +1,19 @@
-using Models;
-
 namespace Models;
 
 public class Comment
 {
-    public Comment(string body, User user)
+    public Comment() {}
+    
+    public Comment(string content, User user)
     {
-        this.Body = body;
-        this.User = user;
-        this.CreatedAt = DateTime.Now;
+        Content = content;
+        User = user;
+        CreatedAt = DateTime.Now;
     }
-    string Body { get; set; }
-    User User { get; set; }
-    DateTime CreatedAt { get; set; }
-    int Votes { get; set; }
+    
+    public long CommentId { get; set; }
+    public string Content { get; set; }
+    public User User { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public int Votes { get; set; }
 }

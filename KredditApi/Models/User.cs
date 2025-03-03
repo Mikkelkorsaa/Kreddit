@@ -2,10 +2,12 @@ namespace Models;
 
 public class User
 {
+    public User() {}
     public User(string name)
     {
-        this.Name = name;
+        Name = name;
     }
-    public int UserId { get; set; }
+    
+    public long UserId { get; set; }
     public string Name { get; set; }
 }
