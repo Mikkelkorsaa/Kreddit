@@ -1,0 +1,6 @@
+@KredditApi_HostAddress = http://localhost:5201
+
+GET {{KredditApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

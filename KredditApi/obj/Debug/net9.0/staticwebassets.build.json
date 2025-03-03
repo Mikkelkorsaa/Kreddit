@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "43CYqcGePgXFiMDRNtlv2NUT9D64PmDt8gA/emXE+aE=",
+  "Source": "KredditApi",
+  "BasePath": "_content/KredditApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
