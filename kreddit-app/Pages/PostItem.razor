@@ -67,14 +67,20 @@ else
     protected override async Task OnInitializedAsync()
     {
         Post = await apiService.GetPost(PostId);
+        Console.WriteLine(Post);
     }
+
     private async void Upvote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        await apiService.UpvoteComment(PostId, id);
+        Post = await apiService.GetPost(PostId);
+        StateHasChanged();
     }
 
     private async void Downvote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        await apiService.DownvotePost(id);
+        Post = await apiService.GetPost(PostId);
+        StateHasChanged();
     }
 }

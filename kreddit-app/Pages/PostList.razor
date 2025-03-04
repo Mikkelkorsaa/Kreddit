@@ -2,7 +2,7 @@
 
 @using kreddit_app.Data;
 @using shared.Model;
-@inject ApiService apiService
+@inject ApiService ApiService
 
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
@@ -44,16 +44,37 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        posts = await apiService.GetPosts();
+        posts = await ApiService.GetPosts();
+        Console.WriteLine(posts);
     }
 
-    private async void Upvote(int id)
+    private async Task Upvote(int id)
     {
-        var updatedPost = await apiService.UpvotePost(id);
+        var updatedPost = await ApiService.UpvotePost(id);
+
+        if (updatedPost != null)
+        {
+            votePost = updatedPost;
+
+            // Use LINQ to find and replace the post in the array
+            posts = posts.Select(post => post.Id == updatedPost.Id ? updatedPost : post).ToArray();
+
+            StateHasChanged();
+        }
     }
 
-    private async void Downvote(int id)
+    private async Task Downvote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedPost = await ApiService.DownvotePost(id);
+
+        if (updatedPost != null)
+        {
+            votePost = updatedPost;
+
+            // Use LINQ to find and replace the post in the array
+            posts = posts.Select(post => post.Id == updatedPost.Id ? updatedPost : post).ToArray();
+
+            StateHasChanged();
+        }
     }
 }
