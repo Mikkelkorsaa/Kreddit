@@ -1,5 +1,6 @@
 using Contexts;
 using shared.Model;
+using KredditApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +29,12 @@ public class PostController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetPost(int id)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.Id == id);
+        var post = _context.Posts
+            .Include(p => p.User) 
+            .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
+            .FirstOrDefault(p => p.Id == id);
+
         if (post == null)
         {
             return NotFound();
@@ -115,39 +121,57 @@ public class PostController : ControllerBase
 
     // POST: api/posts
     [HttpPost]
-    public IActionResult CreatePost([FromBody] Post post)
+    public IActionResult CreatePost([FromBody] PostRequest postRequest)
     {
-        if (post == null)
+        if (postRequest == null || string.IsNullOrWhiteSpace(postRequest.Title) || string.IsNullOrWhiteSpace(postRequest.Content))
         {
-            return BadRequest("Post cannot be null");
+            return BadRequest("Post data is invalid");
         }
 
-        var newPost = new Post(new User(), post.Title, post.Content);
+        var user = _context.Users.FirstOrDefault(u => u.Id == postRequest.UserId);
+        if (user == null)
+        {
+            return NotFound($"User with ID {postRequest.UserId} not found");
+        }
+
+        var newPost = new Post(user, postRequest.Title, postRequest.Content);
         _context.Posts.Add(newPost);
         _context.SaveChanges();
     
-        return CreatedAtAction(nameof(GetPost), new { id = post.Id }, newPost);
+        return CreatedAtAction(nameof(GetPost), new { id = newPost.Id }, newPost);
     }
 
     // POST: api/posts/{id}/comments
-    [HttpPost("{id}/comments")]
-    public IActionResult CreateComment(int id, [FromBody] Comment comment)
+    [HttpPost("{postId}/comments")]
+    public IActionResult CreateComment(int postId, [FromBody] CommentRequest commentRequest)
     {
+        if (commentRequest == null || string.IsNullOrWhiteSpace(commentRequest.Content))
+        {
+            return BadRequest("Comment content cannot be null or empty");
+        }
+
         var post = _context.Posts
             .Include(p => p.Comments)
-            .FirstOrDefault(p => p.Id == id);
-    
+            .FirstOrDefault(p => p.Id == postId);
+
         if (post == null)
         {
-            return NotFound($"Post with ID {id} not found");
+            return NotFound($"Post with ID {postId} not found");
         }
 
-        if (comment == null)
+        var newComment = new Comment
         {
-            return BadRequest("Comment cannot be null");
+            Content = commentRequest.Content,
+            Upvotes = 0,
+            Downvotes = 0,
+            User = _context.Users.FirstOrDefault(u => u.Id == commentRequest.UserId)
+        };
+
+        if (newComment.User == null)
+        {
+            return BadRequest($"User with ID {commentRequest.UserId} not found");
         }
 
-        var newComment = new Comment(comment.Content);
         post.Comments.Add(newComment);
         _context.SaveChanges();
 
