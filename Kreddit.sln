@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KredditApi", "KredditApi\KredditApi.csproj", "{E781A77A-E117-486E-8A74-C614FE1AF654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kreddit-app", "kreddit-app\kreddit-app.csproj", "{DE192E73-349C-43EF-B307-6681BF226689}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E781A77A-E117-486E-8A74-C614FE1AF654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E781A77A-E117-486E-8A74-C614FE1AF654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E781A77A-E117-486E-8A74-C614FE1AF654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E781A77A-E117-486E-8A74-C614FE1AF654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE192E73-349C-43EF-B307-6681BF226689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE192E73-349C-43EF-B307-6681BF226689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE192E73-349C-43EF-B307-6681BF226689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE192E73-349C-43EF-B307-6681BF226689}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
