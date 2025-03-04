@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj": {}
+    "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj": {}
   },
   "projects": {
-    "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj": {
+    "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj",
+        "projectUniqueName": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj",
         "projectName": "KredditApi",
-        "projectPath": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj",
+        "projectPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj",
         "packagesPath": "/home/korsaa/.nuget/packages/",
-        "outputPath": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/obj/",
+        "outputPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/korsaa/.nuget/NuGet/NuGet.Config"
@@ -25,7 +25,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj": {
+                "projectPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -93,6 +97,75 @@
             }
           },
           "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.103/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj",
+        "projectName": "shared",
+        "projectPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj",
+        "packagesPath": "/home/korsaa/.nuget/packages/",
+        "outputPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/korsaa/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.103/RuntimeIdentifierGraph.json"
         }
       }
     }

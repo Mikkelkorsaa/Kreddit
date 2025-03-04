@@ -1,5 +1,5 @@
-using Models;
 using Microsoft.EntityFrameworkCore;
+using shared.Model;
 
 namespace Contexts;
 

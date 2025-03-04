@@ -148,3 +148,5 @@
 /home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/bin/Debug/net9.0/runtimes/win-arm64/native/e_sqlite3.dll
 /home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/bin/Debug/net9.0/runtimes/win-x64/native/e_sqlite3.dll
 /home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/bin/Debug/net9.0/runtimes/win-x86/native/e_sqlite3.dll
+/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/bin/Debug/net9.0/shared.dll
+/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/bin/Debug/net9.0/shared.pdb

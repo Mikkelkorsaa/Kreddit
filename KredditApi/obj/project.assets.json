@@ -1207,6 +1207,16 @@
         "build": {
           "buildTransitive/net6.0/_._": {}
         }
+      },
+      "shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/shared.dll": {}
+        }
       }
     }
   },
@@ -3561,6 +3571,11 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "shared/1.0.0": {
+      "type": "project",
+      "path": "../shared/shared.csproj",
+      "msbuildProject": "../shared/shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3569,7 +3584,8 @@
       "Microsoft.AspNetCore.OpenApi >= 9.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.2",
       "Microsoft.EntityFrameworkCore.SQLite >= 9.0.2",
-      "Swashbuckle.AspNetCore >= 7.3.1"
+      "Swashbuckle.AspNetCore >= 7.3.1",
+      "shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3578,11 +3594,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj",
+      "projectUniqueName": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj",
       "projectName": "KredditApi",
-      "projectPath": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/KredditApi.csproj",
+      "projectPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/KredditApi.csproj",
       "packagesPath": "/home/korsaa/.nuget/packages/",
-      "outputPath": "/home/korsaa/Dev/3rdSem/miniProjects/Kreddit/KredditApi/obj/",
+      "outputPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/KredditApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/korsaa/.nuget/NuGet/NuGet.Config"
@@ -3596,7 +3612,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj": {
+              "projectPath": "/home/korsaa/Dev/3rdSem/MiniProjects/Kreddit/shared/shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

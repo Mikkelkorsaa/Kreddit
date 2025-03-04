@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KredditApi", "KredditApi\Kr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kreddit-app", "kreddit-app\kreddit-app.csproj", "{DE192E73-349C-43EF-B307-6681BF226689}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shared", "shared\shared.csproj", "{658CBABC-5682-429C-8DFF-FFD8ED9077A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{DE192E73-349C-43EF-B307-6681BF226689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE192E73-349C-43EF-B307-6681BF226689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE192E73-349C-43EF-B307-6681BF226689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658CBABC-5682-429C-8DFF-FFD8ED9077A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658CBABC-5682-429C-8DFF-FFD8ED9077A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658CBABC-5682-429C-8DFF-FFD8ED9077A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658CBABC-5682-429C-8DFF-FFD8ED9077A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

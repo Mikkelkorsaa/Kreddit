@@ -1,5 +1,5 @@
 using Contexts;
-using Models;
+using shared.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +28,7 @@ public class PostController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetPost(int id)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.PostId == id);
+        var post = _context.Posts.FirstOrDefault(p => p.Id == id);
         if (post == null)
         {
             return NotFound();
@@ -41,13 +41,13 @@ public class PostController : ControllerBase
     [HttpPut("{id}/upvote")]
     public IActionResult UpvotePost(int id)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.PostId == id);
+        var post = _context.Posts.FirstOrDefault(p => p.Id == id);
         if (post == null)
         {
             return NotFound();
         }
 
-        post.Votes++;
+        post.Upvotes++;
         _context.SaveChanges();
 
         return Ok(post);
@@ -57,13 +57,13 @@ public class PostController : ControllerBase
     [HttpPut("{id}/downvote")]
     public IActionResult DownvotePost(int id)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.PostId == id);
+        var post = _context.Posts.FirstOrDefault(p => p.Id == id);
         if (post == null)
         {
             return NotFound();
         }
 
-        post.Votes--;
+        post.Downvotes++;
         _context.SaveChanges();
 
         return Ok(post);
@@ -73,19 +73,19 @@ public class PostController : ControllerBase
     [HttpPut("{postId}/comments/{commentId}/upvote")]
     public IActionResult UpvoteComment(int postId, int commentId)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.PostId == postId);
+        var post = _context.Posts.FirstOrDefault(p => p.Id == postId);
         if (post == null)
         {
             return NotFound("Post not found");
         }
 
-        var comment = post.Comments.FirstOrDefault(c => c.CommentId == commentId);
+        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
         if (comment == null)
         {
             return NotFound("Comment not found");
         }
 
-        comment.Votes++;
+        comment.Upvotes++;
         _context.SaveChanges();
 
         return Ok(comment);
@@ -95,19 +95,19 @@ public class PostController : ControllerBase
     [HttpPut("{postId}/comments/{commentId}/downvote")]
     public IActionResult DownvoteComment(int postId, int commentId)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.PostId == postId);
+        var post = _context.Posts.FirstOrDefault(p => p.Id == postId);
         if (post == null)
         {
             return NotFound("Post not found");
         }
 
-        var comment = post.Comments.FirstOrDefault(c => c.CommentId == commentId);
+        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
         if (comment == null)
         {
             return NotFound("Comment not found");
         }
 
-        comment.Votes--;
+        comment.Downvotes--;
         _context.SaveChanges();
 
         return Ok(comment);
@@ -122,11 +122,11 @@ public class PostController : ControllerBase
             return BadRequest("Post cannot be null");
         }
 
-        var newPost = new Post(post.Title, post.Content);
+        var newPost = new Post(new User(), post.Title, post.Content);
         _context.Posts.Add(newPost);
         _context.SaveChanges();
     
-        return CreatedAtAction(nameof(GetPost), new { id = post.PostId }, newPost);
+        return CreatedAtAction(nameof(GetPost), new { id = post.Id }, newPost);
     }
 
     // POST: api/posts/{id}/comments
@@ -135,7 +135,7 @@ public class PostController : ControllerBase
     {
         var post = _context.Posts
             .Include(p => p.Comments)
-            .FirstOrDefault(p => p.PostId == id);
+            .FirstOrDefault(p => p.Id == id);
     
         if (post == null)
         {
@@ -151,6 +151,6 @@ public class PostController : ControllerBase
         post.Comments.Add(newComment);
         _context.SaveChanges();
 
-        return CreatedAtAction(nameof(GetPost), new { id = post.PostId }, newComment);
+        return CreatedAtAction(nameof(GetPost), new { id = post.Id }, newComment);
     }
 }
