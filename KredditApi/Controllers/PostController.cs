@@ -1,6 +1,6 @@
-using Contexts;
 using shared.Model;
 using KredditApi.Models;
+using KredditApi.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +22,8 @@ public class PostController : ControllerBase
     public IActionResult GetPosts()
     {
         var posts = _context.Posts
+            .Include(p => p.User)
+            .Include(p => p.Comments)
             .OrderBy(p => p.Id)
             .ToList();
         return Ok(posts);

@@ -1,4 +1,4 @@
-namespace Contexts;
+namespace KredditApi.Models;
 
 public class CommentRequest
 {

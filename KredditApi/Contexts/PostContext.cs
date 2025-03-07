@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using shared.Model;
 
-namespace Contexts;
+namespace KredditApi.Contexts;
 
 public class PostContext : DbContext
 {
