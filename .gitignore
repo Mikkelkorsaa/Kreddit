@@ -20,15 +20,7 @@
 mono_crash.*
 
 # Build results
-KredditApi/bin/Debug/
-KredditApi/bin/Release/
-KredditApi/obj/Debug/
-KredditApi/obj/Release/
-kreddit-app/bin/
-kreddit-app/obj/Debug/
-kreddit-app/obj/Release/
-shared/bin/
-shared/obj
+[Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -38,9 +30,12 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
+[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+!KredditApi/bin/posts.db
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
