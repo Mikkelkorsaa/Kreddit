@@ -20,7 +20,13 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+KredditApi/bin/Debug/
+KredditApi/bin/Release/
+KredditApi/obj/Debug/
+KredditApi/obj/Release/
+kreddit-app/bin/
+kreddit-app/obj/Debug/
+kreddit-app/obj/Release/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
