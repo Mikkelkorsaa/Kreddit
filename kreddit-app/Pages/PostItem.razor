@@ -1,8 +1,4 @@
-﻿<!-- 
-Notice how this route has a route parameter 'id'. This is how we can pass data to the route.
-See how the links are made in 'PostList.razor'.
--->
-@page "/post/{id}"
+﻿@page "/post/{id}"
 
 @using kreddit_app.Data;
 @using shared.Model;
@@ -20,6 +16,8 @@ div.contents {
 }
 </style>
 
+<a href="/">Go to Home</a>
+
 @if (Post == null)
 {
     <p><em>Loading...</em></p>
@@ -31,31 +29,33 @@ else
         <p><strong>User: @Post.User.Username, Votes: @(Post.Upvotes - Post.Downvotes)</strong></p>
         <p>@Post.Content</p>
     </div>
+    
+    <CreateComment PostId="@PostId" OnCommentAdded="RefreshPage" />
+    
+    @if (Post.Comments.Count != 0)
+    {
+        <div class="contents">
+            <h4>Comments</h4>
+            <table>
+                <tr>
+                    <th>User</th>
+                    <th>Comment</th>
+                    <th colspan="3">Votes</th>
+                </tr>
+                @foreach (var comment in Post.Comments)
+                {
+                    <tr>
+                        <td>@comment.User.Username</td>
+                        <td>@comment.Content</td>
+                        <td>@(comment.Upvotes - comment.Downvotes)</td>
+                        <td><button @onclick="() => Upvote(comment.Id)">Upvote</button></td>
+                        <td><button @onclick="() => Downvote(comment.Id)">Downvote</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
 
-    <div class="contents">
-    <h4>Comments</h4>
-    <table>
-        <tr>
-            <th>User</th>
-            <th>Comment</th>
-            <th colspan="3">Votes</th>
-        </tr>
-        @foreach (var comment in Post.Comments)
-        {
-            <tr>
-                <td>@comment.User.Username</td>
-                <td>@comment.Content</td>
-                <td>@(comment.Upvotes - comment.Downvotes)</td>
-                <td><button @onclick="() => Upvote(comment.Id)">Upvote</button></td>
-                <td><button @onclick="() => Downvote(comment.Id)">Downvote</button></td>
-            </tr>
-        }
-    </table>
-    </div>
-
-    <!-- This demonstrates how to pass in PostId to the component 'CreateComment'. See how 
-         it is used in the file CreateComment.razor -->
-    <CreateComment PostId=@PostId></CreateComment>
 }
 
 @code {
@@ -67,19 +67,22 @@ else
     protected override async Task OnInitializedAsync()
     {
         Post = await apiService.GetPost(PostId);
-        Console.WriteLine(Post);
     }
 
-    private async void Upvote(int id)
+    private async Task Upvote(int id)
     {
-        await apiService.UpvoteComment(PostId, id);
-        Post = await apiService.GetPost(PostId);
+        Post = await apiService.UpvoteComment(PostId, id);
         StateHasChanged();
     }
 
     private async void Downvote(int id)
     {
-        await apiService.DownvotePost(id);
+        Post = await apiService.DownvoteComment(PostId, id);
+        StateHasChanged();
+    }
+
+    private async void RefreshPage()
+    {
         Post = await apiService.GetPost(PostId);
         StateHasChanged();
     }

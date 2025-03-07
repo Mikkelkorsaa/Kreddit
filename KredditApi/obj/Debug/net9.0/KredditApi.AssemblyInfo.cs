@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KredditApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22619ae8975c28fae8e7437cd469e6e0b949eae1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b68d11111eb0a55fdcef5da07733fdcf07aab30")]
 [assembly: System.Reflection.AssemblyProductAttribute("KredditApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KredditApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -21,7 +21,9 @@ public class PostController : ControllerBase
     [HttpGet]
     public IActionResult GetPosts()
     {
-        var posts = _context.Posts.ToList();
+        var posts = _context.Posts
+            .OrderBy(p => p.Id)
+            .ToList();
         return Ok(posts);
     }
 
@@ -34,7 +36,14 @@ public class PostController : ControllerBase
             .Include(p => p.Comments)
                 .ThenInclude(c => c.User)
             .FirstOrDefault(p => p.Id == id);
-
+        
+        if (post != null)
+        {
+            post.Comments = post.Comments
+                .OrderBy(c => c.Id)
+                .ToList();
+        }
+        
         if (post == null)
         {
             return NotFound();
@@ -79,13 +88,10 @@ public class PostController : ControllerBase
     [HttpPut("{postId}/comments/{commentId}/upvote")]
     public IActionResult UpvoteComment(int postId, int commentId)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.Id == postId);
-        if (post == null)
-        {
-            return NotFound("Post not found");
-        }
-
-        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+        var comment = _context.Comments
+            .Include(c => c.User)
+            .FirstOrDefault(c => c.Id == commentId);
+        
         if (comment == null)
         {
             return NotFound("Comment not found");
@@ -94,29 +100,56 @@ public class PostController : ControllerBase
         comment.Upvotes++;
         _context.SaveChanges();
 
-        return Ok(comment);
+        // Include logic to fetch the full Post and return the updated Post
+        var updatedPost = _context.Posts
+            .Include(p => p.User) 
+            .Include(p => p.Comments)
+            .ThenInclude(c => c.User)
+            .FirstOrDefault(p => p.Id == postId);
+
+        if (updatedPost != null)
+        {
+            updatedPost.Comments = updatedPost.Comments
+                .OrderBy(c => c.Id)
+                .ToList();
+        }
+
+
+        return Ok(updatedPost);
     }
 
     // PUT: api/posts/{postId}/comments/{commentId}/downvote
     [HttpPut("{postId}/comments/{commentId}/downvote")]
     public IActionResult DownvoteComment(int postId, int commentId)
     {
-        var post = _context.Posts.FirstOrDefault(p => p.Id == postId);
-        if (post == null)
-        {
-            return NotFound("Post not found");
-        }
-
-        var comment = post.Comments.FirstOrDefault(c => c.Id == commentId);
+        var comment = _context.Comments
+            .Include(c => c.User)
+            .FirstOrDefault(c => c.Id == commentId);
+        
         if (comment == null)
         {
             return NotFound("Comment not found");
         }
 
-        comment.Downvotes--;
+        comment.Downvotes++;
         _context.SaveChanges();
 
-        return Ok(comment);
+        // Include logic to fetch the full Post and return the updated Post
+        var updatedPost = _context.Posts
+            .Include(p => p.User) 
+            .Include(p => p.Comments)
+            .ThenInclude(c => c.User)
+            .FirstOrDefault(p => p.Id == postId);
+
+        if (updatedPost != null)
+        {
+            updatedPost.Comments = updatedPost.Comments
+                .OrderBy(c => c.Id)
+                .ToList();
+        }
+
+
+        return Ok(updatedPost);
     }
 
     // POST: api/posts
