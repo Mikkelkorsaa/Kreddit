@@ -27,6 +27,8 @@ KredditApi/obj/Release/
 kreddit-app/bin/
 kreddit-app/obj/Debug/
 kreddit-app/obj/Release/
+shared/bin/
+shared/obj
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
