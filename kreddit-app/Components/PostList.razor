@@ -1,0 +1,79 @@
+﻿@inherits LayoutComponentBase
+
+@using kreddit_app.Data;
+@inject ApiService ApiService
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<CreatePost OnPostAdded="HandlePostAdded" />
+<br/>
+
+@if (posts == null){}
+else
+{
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th colspan="3">Votes</th>
+        </tr>
+        @foreach (var post in posts)
+        {
+            <tr>
+                <td><a href="/post/@post.Id">@post.Title</a></td>
+                <td>@post.Content</td>
+                <td>@(post.Upvotes - post.Downvotes)</td>
+                <td><button @onclick="() => Upvote(post.Id)">Upvote</button></td>
+                <td><button @onclick="() => Downvote(post.Id)">Downvote</button></td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    private Post[]? posts;
+    private Post? votePost;
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await ApiService.GetPosts();
+    }
+
+    private async Task Upvote(int id)
+    {
+        var updatedPost = await ApiService.UpvotePost(id);
+
+        if (updatedPost != null)
+        {
+            votePost = updatedPost;
+
+            // Use LINQ to find and replace the post in the array
+            posts = posts.Select(post => post.Id == updatedPost.Id ? updatedPost : post).ToArray();
+
+            StateHasChanged();
+        }
+    }
+
+    private async Task Downvote(int id)
+    {
+        var updatedPost = await ApiService.DownvotePost(id);
+
+        if (updatedPost != null)
+        {
+            votePost = updatedPost;
+
+            // Use LINQ to find and replace the post in the array
+            posts = posts.Select(post => post.Id == updatedPost.Id ? updatedPost : post).ToArray();
+
+            StateHasChanged();
+        }
+    }
+
+    private async Task HandlePostAdded()
+    {
+        posts = await ApiService.GetPosts();
+        StateHasChanged();
+    }
+
+}
